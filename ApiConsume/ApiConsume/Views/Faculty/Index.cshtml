@@ -1,0 +1,56 @@
+﻿@{
+}
+
+@model IEnumerable<ApiConsume.Models.Faculty>
+
+
+<style>
+    .single_item {
+        width: auto;
+        height: auto;
+        border-radius:20px;
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 20px;
+    }
+
+    .single_img {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        border-radius:20px;
+        overflow: hidden;
+
+    }
+
+    .single_img img{
+        width:100%;
+        height:100%;
+        position:absolute;
+        object-fit:cover;
+    }
+</style>
+<h1>Faculty</h1>
+
+<div>
+    <div class="container d-flex flex-wrap">
+        @foreach (var item in Model)
+        {
+            <div class="col-3">
+                <div class="single_item">
+                    <div class="single_img">
+                        <img src="@item.FacultyImage">
+
+                    </div>
+                    <div>
+                        <h4 class="pb-0">@item.FacultyName</h4>
+                        <p class="pb-0">@item.FacultyDepartment</p>
+                        <span class="pb-0">@item.Salary</span>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

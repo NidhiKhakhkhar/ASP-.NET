@@ -1,0 +1,37 @@
+﻿@{
+}
+@model IEnumerable<ApiConsume.Models.Faculty>
+
+<a asp-action="AddEdit" asp-controller="Faculty" class="btn btn-outline-success">Add Faculty</a>
+    <hr />
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>FacultyName</th>
+                <th>FacultyDepartment</th>
+                <th>Salary</th>
+                <th>FacultyImage</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.FacultyName</td>
+                    <td>@item.FacultyDepartment</td>
+                    <td>@item.Salary</td>
+                    <td>@item.FacultyImage</td>
+                    <td>
+                        <a href="@Url.Action("AddEdit","Faculty",new{id = item.id})" class="btn btn-outline-primary rounded">Edit</a>
+                        <a href="@Url.Action("Delete","Faculty",new{id = item.id})" class="btn btn-outline-danger rounded">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

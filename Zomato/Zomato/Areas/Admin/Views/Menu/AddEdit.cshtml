@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Zomato.Areas.Admin.Models.Menus;
+@using Zomato.BAL;
+
+<main class="main" id="main">
+    <div class="container border border-gray rounded p-5 shadow">
+        <h2><i class="bx bxs-coffee me-2 pb-5" style="font-size: 25px"></i>Add Menu Item</h2>
+
+        <hr />
+
+        <form class="pt-3" asp-area="Admin" asp-controller="Menu" asp-action="Save">
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Item Name</label>
+                <input type="text" class="form-control" asp-for="ItemName" placeholder="Item Name" aria-label="Item name">
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Description</label>
+                <input type="text" class="form-control" asp-for="Description" placeholder="Description" aria-label="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Price</label>
+                <input type="text" class="form-control" asp-for="Price" placeholder="Price" aria-label="Price">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Image URL</label>
+                <input type="text" class="form-control" asp-for="ImageUrl" placeholder="ImageUrl" aria-label="ImageUrl">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+           <div class="row">
+                <div class="col my-4 col-md-6">
+                    <label><span class="text-danger">*</span>IsActive</label>
+                    <div class="d-flex mt-3">
+                        <div class="d-flex">
+                            <input type="radio" value="true" asp-for="IsActive" name="IsActive" checked="checked" />
+                            <label for="Yes" class="ms-3">Yes</label>
+                        </div>
+                        <div class="d-flex ms-4">
+                            <input type="radio" value="false" asp-for="IsActive" name="IsActive" />
+                            <label for="No" class="ms-3">No</label>
+                        </div>
+                    </div>
+                    @* <input type="text" class="form-control" asp-for="IsActive" placeholder="IsActive" aria-label="IsActive"> *@
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+
+                <div class="col my-4 col-md-6">
+                    <label><span class="text-danger">*</span>Rating</label>
+                    <input type="text" class="form-control" asp-for="Rating" placeholder="Rating" aria-label="Rating">
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+
+           </div>
+
+            
+            <div class="col mt-4">
+
+                <input type="hidden" name="MenuID" value="@Model.MenuID" />
+                <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                <input type="hidden" name="CategoryID" value="@CV.CategoryID()" />
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+
+        <br />
+
+        <form asp-area="Admin" asp-controller="Menu" asp-action="MenuList">
+            <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+            <input type="hidden" name="CategoryID" value="@CV.CategoryID()" />
+            <button class="btn btn-secondary" type="submit">Back</button>
+        </form>
+    </div>
+</main>

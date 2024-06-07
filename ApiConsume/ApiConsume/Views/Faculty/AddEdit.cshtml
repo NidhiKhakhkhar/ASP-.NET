@@ -1,0 +1,48 @@
+﻿@{
+}
+@model ApiConsume.Models.Faculty;
+
+<h2>Add Faculty</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Faculty" asp-action="Save" method="post">
+            <div>
+            </div>
+            @Html.HiddenFor(f => f.id)
+            <div class="col">
+                <label><span class="text-danger">*</span>Faculty Name</label>
+                <input type="text" class="form-control" asp-for="FacultyName" placeholder="Faculty Name" />
+
+            </div>
+            <div class="col">
+                <label><span class="text-danger">*</span>Faculty Department</label>
+                <input type="text" class="form-control" asp-for="FacultyDepartment" placeholder="Faculty Department" />
+
+            </div>
+            <div class="col">
+                <label><span class="text-danger">*</span>Faculty Image</label>
+                <input type="text" class="form-control" asp-for="FacultyImage" placeholder="Faculty Image" />
+
+            </div>
+            <div class="col">
+                <label><span class="text-danger">*</span>Faculty Salary</label>
+                <input type="text" class="form-control" asp-for="Salary" placeholder="Faculty Salary" />
+
+            </div>
+            <div class="form-group mt-2">
+                <button class="btn btn-primary" asp-action="Save">Save</button>
+                <a asp-action="Index" class="btn btn-info">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

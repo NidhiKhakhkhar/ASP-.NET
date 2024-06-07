@@ -1,0 +1,166 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+}
+@using System.Data;
+
+
+<style>
+    #intro {
+        background-image: url("https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        height: 70vh;
+    }
+
+    .text-white {
+        color: #fff !important;
+        margin-top: 200px;
+    }
+
+    .single_blog_item {
+        width: auto;
+        height: auto;
+        /* border: 2px solid rgba(10 , 50 , 10, 0.8); */
+        border-radius: 10px 10px 0px 0px;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .single_blog_img {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        /*  border: 1px solid rgba(10, 50, 10, 0.5); */
+        border-radius: 10px 10px 0px 0px;
+        overflow: hidden;
+    }
+
+        .single_blog_img img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: cover;
+        }
+
+    .blog_item_section .single_blog_text {
+        padding: 10px 10px;
+    }
+
+    .navbar .nav-link {
+        color: #fff !important;
+    }
+
+    .menu .main-menu-item {
+        text-align: center !important;
+        justify-content: flex-end !important;
+        color: #fff !important;
+    }
+
+        .menu .main-menu-item ul li a {
+            color: #fff !important;
+            font-size: 16px;
+            padding: 0px 22px !important;
+            font-family: "Lora", serif;
+        }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+
+    .menu_fixed {
+        position: fixed;
+        z-index: 9999 !important;
+        width: 100%;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.05);
+        top: 0;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.6rem;
+    }
+
+    .container1 {
+        max-width: 33.3333%;
+        width: 100%;
+    }
+    
+</style>
+
+<main class="main" id="main">
+
+    
+   @*  <div id="intro" class="bg-image shadow-2-strong">
+        <div class="mask">
+            <div class="container d-flex align-items-center justify-content-center text-center h-100">
+                <div class="text-white" data-mdb-theme="dark">
+                    <h1 class="mb-3 text-light">Zomato</h1>
+                    <h1 class="mb-4 text-light">Discover the best food & drinks in <span>Rajkot</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background image --> *@
+
+    <section class="chefs_part blog_item_section p-5">
+
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="single_blog_item">
+                        <div class="single_blog_img">
+                            <img src="~/userAssets/img/onlineorder.jpg" alt="">
+                        </div>
+                        <div class="single_blog_text text-start">
+                            <h3>Online order</h3>
+                            <p>Stay home and order to your doorstep.</p>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="single_blog_item">
+                        <div class="single_blog_img">
+                            <img src="~/userAssets/img/dinningin.jpg" alt="">
+                        </div>
+                        <div class="single_blog_text text-start">
+                            <h3>Dinning</h3>
+                            <p>View the citys favourite dining venues</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container    ">
+        <h1>Popular localities</h1>
+    </div>
+
+    <div class="container align-items-center d-flex flex-wrap ">
+        @foreach (DataRow dr in Model.Rows)
+        {
+            @if (Convert.ToInt32(dr["RestaurantCount"]) > 0)
+            {
+                <div class="container1">
+                    <a asp-area="User" asp-controller="User" asp-action="Index" asp-route-cityid="@Convert.ToInt32(dr["CityID"])" asp-route-cityname ="@dr["CityName"]">
+
+                        <div class="py-3 pr-4">
+                            <div class="card p-3 shadow border-0 ">
+                                <h3 class="">@dr["CityName"]</h3>
+                                <p class="">@dr["RestaurantCount"] places</p>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            }
+
+        }
+    </div>
+</main>
+

@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Zomato.BAL;
+@model Zomato.Areas.Admin.Models.FoodCategoryModel;
+
+
+<main class="main" id="main">
+    <div class="container border border-gray rounded p-5 shadow">
+        <h3 class="fw-bold"><i class="bx bxs-coffee me-2" style="font-size: 20px"></i>Food Category</h3>
+
+       
+
+        <hr />
+
+
+
+        @{
+            if (CV.RestaurantID() == 0)
+            {
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="Save" enctype="multipart/form-data">
+                    <input type="hidden" name="ImageUrl" />
+                    @* @Html.HiddenFor(x => x.ImageUrl) *@
+                    <div class="col my-4">
+                        <label><span class="text-danger">*</span>Category Name</label>
+                        <input type="text" class="form-control" asp-for="CategoryName" placeholder="Category Name" aria-label="Category name">
+                        <span asp-validation-for="CategoryName" class="text-danger"></span> 
+                    </div>
+
+                   @* <div class="col my-4">
+                        <label>ImageUrl</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" placeholder="ImageURl" aria-label="ImageUrl">
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div> *@
+
+                    <div class="col my-4">
+                        <label>ImageUrl</label>
+                        <input type="file" class="form-control" asp-for="File" placeholder="ImageURl" aria-label="ImageUrl">
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+
+                    <div class="col mt-4">
+
+                        <input type="hidden" name="CategoryID" value="@Model.CategoryID" />
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+
+                </form>
+
+                <br />
+
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+                    
+                    <button class="btn btn-secondary" type="submit">Back</button>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="SaveRestaurantWiseFoodCategory">
+                    <div class="col my-4">
+                        <label><span class="text-danger">*</span>Food Category</label>
+                        <select class="form-control" asp-for="CategoryID" asp-items="@(new SelectList(ViewBag.FoodCategory,"CategoryID","CategoryName"))">
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+
+                    <div class="col mt-4">
+
+                        <input type="hidden" name="CategoryID" value="@Model.CategoryID" />
+                        <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+
+
+                <br />
+
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+                    <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                    <button class="btn btn-secondary" type="submit">Back</button>
+                </form>
+            }
+        }
+
+       
+    </div>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+</main>
+

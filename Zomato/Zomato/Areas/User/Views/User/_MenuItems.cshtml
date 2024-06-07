@@ -1,0 +1,37 @@
+﻿@model int
+
+<div class="quantity-container px-2">
+    <a href="#" class="decrement-quantity" data-menuid="@ViewBag.MenuID">-</a>
+    <div>@Model</div>
+    <a href="#" class="increment-quantity" data-menuid="@ViewBag.MenuID">+</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.increment-quantity').click(function (e) {
+            e.preventDefault();
+            var menuId = $(this).data('menuid');
+            $.ajax({
+                url: '/User/Cart/IncrementQuantity',
+                type: 'POST',
+                data: { Quantity: 1, MenuID: menuId },
+                success: function (data) {
+                    $('#quantity-' + menuId).html(data);
+                }
+            });
+        });
+
+        $('.decrement-quantity').click(function (e) {
+            e.preventDefault();
+            var menuId = $(this).data('menuid');
+            $.ajax({
+                url: '/User/Cart/DecrementQuantity',
+                type: 'POST',
+                data: { Quantity: 1, MenuID: menuId },
+                success: function (data) {
+                    $('#quantity-' + menuId).html(data);
+                }
+            });
+        });
+    });
+</script>

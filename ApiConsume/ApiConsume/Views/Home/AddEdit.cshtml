@@ -1,0 +1,54 @@
+﻿@{
+
+}
+
+@model ApiConsume.Models.Employee;
+
+<h2>Add/Edit Employee </h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save" asp-controller="Home" method="post">
+            <div>
+            
+            </div>
+            @Html.HiddenFor(x => x.EmpID)
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Employee Name</label>
+                <input type="text" class="form-control" asp-for="EmpName" placeholder="Employee Name">
+                <span asp-validation-for="EmpName" class="text-danger"></span>
+            </div>
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Employee Code</label>
+                <input type="text" class="form-control" asp-for="EmpCode" placeholder="Employee Code" >
+                <span asp-validation-for="EmpCode" class="text-danger"></span>
+            </div>
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Email</label>
+                <input type="text" class="form-control" asp-for="Email" placeholder="Email" >
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Contact</label>
+                <input type="text" class="form-control" asp-for="Contact" placeholder="Contact" >
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Salary</label>
+                <input type="text" class="form-control" asp-for="Salary" placeholder="Salary">
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <button class="btn btn-primary" asp-action="Save">Save</button>
+                <a asp-action="Index" class="btn btn-info">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

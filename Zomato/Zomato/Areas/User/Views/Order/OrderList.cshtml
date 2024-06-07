@@ -1,0 +1,176 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout_Zomato.cshtml";
+
+}
+
+@using Zomato.BAL;
+@using System.Data;
+@model Zomato.Areas.User.Models.OrderListModel;
+
+<style>
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0px 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .card1{
+        border:none;
+        
+    }
+</style>
+
+<main class="main" id="main">
+    @if (Model.OrderList.Rows.Count > 0)
+    {
+        <div class="container border border-gray rounded p-5">
+
+
+            <div class="container ">
+
+
+                <h3>Your Orders</h3>
+                <nav class="nav">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="User1" asp-action="UserIndex">Home</a></li>
+
+                        <li class="breadcrumb-item active">Order List</li>
+                    </ol>
+                </nav>
+
+
+            </div>
+            <br />
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Restaurant Name</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Order Date</th>
+                            <th>Delivery Address</th>
+                            <th>Payment Method</th>
+                            <th>Order Detail</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow dr in Model.OrderList.Rows)
+                        {
+
+                            <tr class="@((dr["Status"].ToString() == "Cancelled") ? "table-danger" : (dr["Status"].ToString() == "Completed" ? "table-success" : "table-warning"))">
+                                <td>@dr["OrderNo"]</td>
+                                <td>@dr["Name"]</td>
+                                <td>@dr["TotalAmount"]</td>
+                                <td>@dr["Status"]</td>
+                                <td>@Convert.ToDateTime(dr["OrderDate"]).ToString("dd-MM-yyyy")</td>
+                                <td>@dr["DeliveryAddress"]</td>
+                                <td>@dr["PaymentMethod"]</td>
+                                <td>
+                                    <a asp-area="User" asp-controller="Order" asp-action="OrderItemList" asp-route-orderid="@Convert.ToInt32(dr["OrderID"])">Detail</a>
+                                </td>
+                                <td class="">
+                                    @if (dr["Status"].ToString() == "Pending")
+                                    {
+                                        @if (CV.IsAdmin())
+                                        {
+                                            <a class="btn btn-outline-dark" asp-area="User" asp-controller="Order" asp-action="UpdateStatus" asp-route-orderid="@Convert.ToInt32(dr["OrderID"])" asp-route-userid="@Convert.ToInt32(dr["UserID"])" asp-route-username="@CV.UserOrder()">Complete</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-outline-dark " asp-area="User" asp-controller="Order" asp-action="UpdateStatus" asp-route-orderid="@Convert.ToInt32(dr["OrderID"])">Cancel</a>
+                                        }
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @foreach (DataRow dr in Model.OrderList.Rows)
+            {
+                <div class="container">
+                    @if (ViewBag.orderIDs.Contains(Convert.ToInt32(dr["OrderID"])))
+                    {
+                        <div class="container border shadow p-3 mb-3" >
+                            <div class="my-2">
+                                <p>@Convert.ToDateTime(dr["OrderDate"]).ToString("dd-MM-yyyy")  @Convert.ToDateTime(dr["OrderDate"]).ToString("t")</p>
+                                <p>@dr["Name"]</p>
+
+                            </div>
+                            @foreach (DataRow dataRow in Model.OrderItemList.Rows)
+                            {
+                                if(Convert.ToInt32(dr["OrderID"]) == Convert.ToInt32(dataRow["OrderID"]))
+                                {
+                                    <div class="card1 mb-3">
+                                        <div class="row g-0 w-75 ">
+                                            <div class="col-md-2 ">
+                                                <img src=@dataRow["ImageUrl"] class="img-fluid rounded" alt="...">
+                                            </div>
+                                            <div class="col-md-10 p-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <h5 class="card-title pb-0">@dataRow["ItemName"]</h5>
+                                                        
+                                                    </div>
+
+                                                    <p>&#8377 @dataRow["Price"]</p>
+                                                    <p>Quantity : @dataRow["Quantity"]</p>
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div>
+                                <p>Total Amount : @dr["TotalAmount"]</p>
+                                <p>Delivery Address : @dr["DeliveryAddress"]</p>
+                            </div>
+
+                        </div>
+                    }
+                    
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="container border border-gray rounded p-5">
+            <div class="container ">
+
+
+                <h3>Your Orders</h3>
+                <nav class="nav">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="User1" asp-action="UserIndex">Home</a></li>
+
+                        <li class="breadcrumb-item active">Order List</li>
+                    </ol>
+                </nav>
+
+
+            </div>
+            <br />
+            <div class="container m-auto ">
+                No Orders Yet!!!
+            </div>
+        </div>
+    }
+
+</main>
+

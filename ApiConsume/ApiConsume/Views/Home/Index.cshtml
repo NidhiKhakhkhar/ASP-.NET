@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<ApiConsume.Models.Employee>
+
+
+@TempData["Message"]
+<h1>Index</h1>
+
+<a asp-action="AddEdit" class="btn btn-outline-success">Add Employee</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>EmpID</th>
+            <th>EmpName</th>
+            <th>EmpCode</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Salary</th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    <a href="@Url.Action("AddEdit","Home",new {EmpID = item.EmpID})" class="btn btn-outline-primary rounded">Edit</a>
+                    <a href="@Url.Action("Delete","Home",new {EmpID = item.EmpID})" class="btn btn-outline-danger rounded">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,333 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Zomato.cshtml";
+}
+
+<style>
+    .single_blog_item {
+        width: auto;
+        height: auto;
+        /* border: 2px solid rgba(10 , 50 , 10, 0.8); */
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 30px;
+        overflow: hidden;
+    }
+
+    .single_blog_img {
+        width: 100%;
+        height: 250px;
+        position: relative;
+        /*  border: 1px solid rgba(10, 50, 10, 0.5); */
+        border-radius: 20px 20px 20px 20px;
+        overflow: hidden;
+    }
+
+        .single_blog_img img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: cover;
+        }
+
+    .rating {
+        background-color: green;
+        color: white;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .single_item {
+        width: auto;
+        height: auto;
+        border-radius: 50%;
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 20px;
+    }
+
+    .single_img {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+        .single_img img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: cover;
+        }
+
+    .container {
+        position: relative
+    }
+
+    .wrapper {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .scroll-arrow-btn {
+        position: absolute;
+        top: 35%;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px; /* Adjust as needed */
+        font-size: 200px; /* Adjust as needed */
+        cursor: pointer;
+        display: none;
+    }
+
+    .scroll-arrow-btn1 {
+        position: absolute;
+        height: 100%;
+        width: 3.4rem;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        visibility: visible;
+        opacity: 1;
+        left: -1.7rem;
+        right: unset;
+    }
+
+    .scroll-right-btn {
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .scroll-right-btn1 {
+        font-size: 25px;
+        height: 3.4rem;
+        width: 3.4rem;
+        background: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 2;
+        top: 4.5rem;
+        left: 20px;
+        right: unset;
+        display: initial;
+        border: 4px solid transparent;
+        align-self: center;
+        cursor: pointer;
+    }
+
+    }
+
+    .scroll-left-btn {
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    .scroll-left-btn1 {
+        font-size: 25px;
+        height: 3.4rem;
+        width: 3.4rem;
+        background: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 2;
+        top: 4.5rem;
+        left: 1140px;
+        right: unset;
+        display: initial;
+        border: 4px solid transparent;
+        align-self: center;
+        cursor: pointer;
+    }
+
+    .fs {
+        font-size: large;
+    }
+</style>
+@using System.Data;
+@using Zomato.BAL;
+@model Zomato.Areas.User.Models.MyViewModel;
+
+<main id="main" class="main">
+
+    <div class="container">
+        <h3>Food Categories</h3>
+        <div class="wrapper d-flex mt-3" id="scrollContainer">
+            <a class="text-decoration-none" asp-area="User" asp-controller="User" asp-action="Index" asp-route-cityid="@CV.CityID()" asp-route-cityname="@CV.CityName()">
+                <div class="single_item">
+                    <div class="single_img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAIgHwH1mMqHboxGnQyqxwagVr4BOk5Ij2pQ&usqp=CAU">
+
+                    </div>
+                    <p class="text-center pt-2">All</p>
+                </div>
+            </a>
+            @foreach (DataRow dr in Model.FoodCategoryList.Rows)
+            {
+                <a class="text-decoration-none" asp-area="User" asp-controller="User" asp-action="SelectByFoodCategory" asp-route-categoryid="@Convert.ToInt32(dr["CategoryID"])" asp-route-cityid="@CV.CityID()">
+                    <div class="single_item">
+                        <div class="single_img">
+                            <img src="@Url.Content(dr["ImageUrl"].ToString())" />
+
+                        </div>
+                        <p class="text-center pt-2">@dr["CategoryName"]</p>
+                    </div>
+                </a>
+
+
+            }
+            <div id="scrollRight" class="scroll-arrow-btn1 text-center ">
+                <section class="scroll-right-btn1 pt-2" tabindex="0" role="button" aria-controls="carousel-items">
+                    &#8250;
+                </section>
+
+
+            </div>
+            <div id="scrollLeft" class="scroll-arrow-btn1 text-center">
+                <section class="scroll-left-btn1 pt-2" tabindex="0" role="button" aria-controls="carousel-items">
+                    &#8249;
+                </section>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container my-4">
+        <h3>
+            All Restaurants in @CV.CityName()
+        </h3>
+    </div>
+    <div class="container mt-2">
+        <div class="row">
+            @foreach (DataRow dr in Model.RestaurantList.Rows)
+            {
+
+                <div class="col-sm-6 col-lg-4 ">
+                    <a class="text-decoration-none" asp-area="User" asp-controller="User" asp-action="MenuPage" asp-route-restaurantid="@Convert.ToInt32(dr["RestaurantID"])" asp-route-name="@dr["Name"]">
+                        <div class="single_blog_item text-dark shadow">
+                            <div class="single_blog_img">
+                                <img src="@dr["ImageUrl"]" alt="">
+                            </div>
+                            <div class=" text-start pt-3 d-flex justify-content-between mb-0">
+                                <h5 class="fs">@dr["Name"]</h5>
+                                <div class="">
+                                    <span class="rating ">@dr["AverageRatig"] <i class="fa fa-star"></i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-0">@dr["FoodCatories"]</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+</main>
+
+@section Scripts{
+    <script>
+        // $(document).ready(function () {
+        //     var container = $('#scrollContainer');
+        //     var scrollLeftBtn = $('#scrollLeft');
+        //     var scrollRightBtn = $('#scrollRight');
+
+        //     container.on('mouseenter', function () {
+        //         if (container.get(0).scrollWidth > container.width()) {
+        //             showHideArrows();
+        //         }
+        //     }).on('mouseleave', function () {
+        //         scrollLeftBtn.hide();
+        //         scrollRightBtn.hide();
+        //     });
+
+        //     scrollRightBtn.on('click', function () {
+        //         container.animate({
+        //             scrollLeft: container.scrollLeft() + 800
+        //         }, 200, showHideArrows);
+        //     });
+
+        //     scrollLeftBtn.on('click', function () {
+        //         container.animate({
+        //             scrollLeft: container.scrollLeft() - 800
+        //         }, 200, showHideArrows);
+        //     });
+
+        //     // Function to show/hide arrows based on scroll position
+        //     function showHideArrows() {
+        //         if (container.scrollLeft() == 0) {
+        //             scrollLeftBtn.hide();
+        //         } else {
+        //             scrollLeftBtn.show();
+        //         }
+
+        //         if (container.scrollLeft() + container.innerWidth() >= container.get(0).scrollWidth) {
+        //             scrollRightBtn.hide();
+        //         } else {
+        //             scrollRightBtn.show();
+        //         }
+        //     }
+        // });
+
+        $(document).ready(function () {
+            var container = $('#scrollContainer');
+            var scrollLeftBtn = $('#scrollLeft');
+            var scrollRightBtn = $('#scrollRight');
+
+            // container.on('mouseenter', function () {
+            //     if (container.get(0).scrollWidth > container.width()) {
+            //         showHideArrows();
+            //     }
+            // }).on('mouseleave', function () {
+            //     scrollLeftBtn.hide();
+            //     scrollRightBtn.hide();
+            // });
+
+            // scrollRightBtn.on('click', function () {
+            //     var scrollDistance = container.width() / 2; // Scroll by 50% of container's width
+            //     container.animate({
+            //         scrollLeft: container.scrollLeft() + scrollDistance
+            //     }, 200, showHideArrows);
+            // });
+
+            // scrollLeftBtn.on('click', function () {
+            //     var scrollDistance = container.width() / 2; // Scroll by 50% of container's width
+            //     container.animate({
+            //         scrollLeft: container.scrollLeft() - scrollDistance
+            //     }, 200, showHideArrows);
+            // });
+
+            scrollRightBtn.on('click', function () {
+                container.animate({
+                    scrollLeft: container.scrollLeft() + 190
+                }, 200, showHideArrows);
+            });
+
+            scrollLeftBtn.on('click', function () {
+                container.animate({
+                    scrollLeft: container.scrollLeft() - 190
+                }, 200, showHideArrows);
+            });
+
+            // Function to show/hide arrows based on scroll position
+            function showHideArrows() {
+                if (container.scrollLeft() == 0) {
+                    scrollLeftBtn.hide();
+                } else {
+                    scrollLeftBtn.show();
+                }
+
+                if (container.scrollLeft() + container.innerWidth() >= container.get(0).scrollWidth) {
+                    scrollRightBtn.hide();
+                } else {
+                    scrollRightBtn.show();
+                }
+            }
+        });
+
+    </script>
+}

@@ -1,0 +1,82 @@
+{
+  "version": 2,
+  "dgSpecHash": "7QiOJcxvChjZFhiNAOSxR5wSNUXoTJB/kjCbNCYERv/6VHXuve//qgJOXRAJ+qmuXkce9yEeKwpE80Q+sN4tKg==",
+  "success": true,
+  "projectFilePath": "E:\\nidhi123\\sem 6\\ApiDemo\\ApiDemo\\ApiDemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\91743\\.nuget\\packages\\enterpriselibrary.common\\6.0.1304\\enterpriselibrary.common.6.0.1304.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\enterpriselibrary.common.netcore\\6.3.0\\enterpriselibrary.common.netcore.6.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\enterpriselibrary.data\\6.0.1304\\enterpriselibrary.data.6.0.1304.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\enterpriselibrary.data.netcore\\6.3.2\\enterpriselibrary.data.netcore.6.3.2.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\oracle.manageddataaccess.core\\2.18.3\\oracle.manageddataaccess.core.2.18.3.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.configuration.configurationmanager\\4.6.0-preview6.19303.8\\system.configuration.configurationmanager.4.6.0-preview6.19303.8.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.data.odbc\\4.5.0\\system.data.odbc.4.5.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.data.oledb\\4.6.0-preview6.19303.8\\system.data.oledb.4.6.0-preview6.19303.8.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.data.sqlclient\\4.8.5\\system.data.sqlclient.4.8.5.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.diagnostics.performancecounter\\4.6.0-preview6.19303.8\\system.diagnostics.performancecounter.4.6.0-preview6.19303.8.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.6.0-preview6.19303.8\\system.security.cryptography.protecteddata.4.6.0-preview6.19303.8.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.security.permissions\\4.6.0-preview6.19303.8\\system.security.permissions.4.6.0-preview6.19303.8.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\unity.abstractions\\3.3.1\\unity.abstractions.3.3.1.nupkg.sha512",
+    "C:\\Users\\91743\\.nuget\\packages\\unity.interception\\5.5.6\\unity.interception.5.5.6.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "EnterpriseLibrary.Data 6.0.1304 depends on EnterpriseLibrary.Common (>= 6.0.0) but EnterpriseLibrary.Common 6.0.0 was not found. An approximate best match of EnterpriseLibrary.Common 6.0.1304 was resolved.",
+      "libraryId": "EnterpriseLibrary.Common",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EnterpriseLibrary.Common 6.0.1304' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EnterpriseLibrary.Common",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EnterpriseLibrary.Data 6.0.1304' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EnterpriseLibrary.Data",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

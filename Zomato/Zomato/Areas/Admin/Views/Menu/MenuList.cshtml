@@ -1,0 +1,368 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model DataTable;
+@using System.Data;
+@using Zomato.BAL;
+
+@* <style>
+    .average-rating {
+        position: relative;
+        appearance: none;
+        color: transparent;
+        width: auto;
+        display: inline-block;
+        vertical-align: baseline;
+    }
+
+        .average-rating::before {
+            --percent: calc(4.3/5*100%);
+            content: '★★★★★';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgba(0,0,0,0.2);
+            background: linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+</style> *@
+
+<main class="main" id="main">
+
+    <div class="border rounded p-5">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="fw-bold"><i class="bx bxs-coffee me-2" style="font-size: 20px"></i>Menu Items</h3>
+            
+            @{
+                if(CV.RestaurantID() != 0)
+                {
+                    <a asp-area="Admin" asp-controller="Menu" asp-action="AddEdit">
+
+                        <button class="btn btn btn-primary">
+                            Add Item
+                        </button>
+                    </a>
+                }
+            }
+
+        </div>
+
+        <hr />
+
+        @if (CV.RestaurantID() == 0 && CV.CategoryID() == 0)
+        {
+            <form asp-area="Admin" asp-controller="Menu" asp-action="MenuFilter" >
+                <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+
+                <div class="row">
+                    <div class="w-auto  my-3">
+                        <label class="visually-hidden" for="autoSizingInputGroup">Menu name</label>
+                        <div class="input-group">
+                            <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                            <input type="text" class="form-control" id="ItemName" name="ItemName" placeholder="Menu Name">
+                           
+                        </div>
+                    </div>
+
+                    <div class="w-auto  my-3">
+                        <div class="input-group">
+                            <select class="form-control" name="CategoryID" asp-items="@(new SelectList(ViewBag.FoodCategory,"CategoryID","CategoryName"))">
+                                <option value="">Food Category</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+
+                    <div class="w-auto  my-3">
+                        <label class="visually-hidden" for="autoSizingInputGroup">IsActive</label>
+                        <div class="input-group">
+                            <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                            <input type="text" class="form-control" id="IsActive" name="IsActive" placeholder="Available Menu">
+                           
+                        </div>
+                    </div>
+
+                    @* <div class="mt-2">
+
+                        <p>
+                            <label for="amount">Price range:</label>
+                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        </p>
+                        <span id="currentValues"></span>
+                        <div id="slider-range"></div>
+
+                    </div> *@
+
+                    
+                    <div class="row pb-2">
+                        <div class="w-auto my-3">
+                            <div class="input-group">
+                                <input type="submit" asp-action="MenuFilter" class="btn btn-primary" value="Apply Filter" />
+                            </div>
+                        </div>
+
+                        <div class="w-auto my-3">
+                            <div class="input-group">
+                                <input type="submit"  asp-action="MenuList" class="btn btn-secondary" value="Clear Filter" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+
+        else
+        {
+            <form asp-area="Admin" asp-controller="Menu" asp-action="MenuFilter">
+                <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                <input type="hidden" name="CategoryID" value="@CV.CategoryID()" />
+                <div class="row">
+                    <div class="w-auto  my-3">
+                        <label class="visually-hidden" for="autoSizingInputGroup">Menu name</label>
+                        <div class="input-group">
+                            <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                            <input type="text" class="form-control" id="ItemName" name="ItemName" placeholder="Menu Name">
+                           
+                        </div>
+                    </div>
+
+                   
+
+                    <div class="w-auto  my-3">
+                        <label class="visually-hidden" for="autoSizingInputGroup">IsActive</label>
+                        <div class="input-group">
+                            <div class="input-group-text bg-transparent" style="font-size: 15px"><i class="bi bi-search"></i></div>
+                            <input type="text" class="form-control" id="IsActive" name="IsActive" placeholder="Available Menu">
+                           
+                        </div>
+                    </div>
+
+
+
+                    <div class="row pb-2">
+                        <div class="w-auto my-3">
+                            <div class="input-group">
+                                
+                                
+                                <input type="submit" asp-action="MenuFilter" class="btn btn-primary" value="Apply Filter" />
+                            </div>
+                        </div>
+
+                        <div class="w-auto my-3">
+                            <div class="input-group">
+                               
+                               
+                                <input type="submit" asp-action="MenuList" class="btn btn-secondary" value="Clear Filter" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+
+
+        <div class="">
+            @foreach (DataRow dr in Model.Rows)
+            {
+                @* <div class="card-container">
+                    <div class="image-container">
+
+                        <img src=@dr["ImageUrl"] />
+
+                    </div>
+                    <p>@dr["ItemName"]</p>
+                </div> *@
+                
+               
+
+                <div class="card mb-3 border-1">
+                    <div class="row g-0">
+                        <div class="col-md-2 pt-4">
+                            <img src=@dr["ImageUrl"] class="img-fluid rounded" alt="...">
+                        </div>
+                        <div class="col-md-10" >
+                            <div class="card-body">
+                                <h5 class="card-title pb-0">@dr["ItemName"]</h5>
+                                @{
+                                    if(CV.RestaurantID() == 0 || CV.CategoryID() == 0)
+                                    {
+                                        <h6>@dr["Name"]</h6>
+                                    }
+                                }
+                                <meter class="average-rating" min="0" max="5" value=@dr["Rating"]></meter>
+                                <style>
+                                    .average-rating {
+                                        position: relative;
+                                        appearance: none;
+                                        color: transparent;
+                                        width: auto;
+                                        display: inline-block;
+                                        vertical-align: baseline;
+                                    }
+
+                                        .average-rating::before {
+                                            --percent: calc(@dr["Rating"]/5*100%);
+                                            content: '★★★★★';
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            color: rgba(0,0,0,0.2);
+                                            background: linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+                                            -webkit-background-clip: text;
+                                            -webkit-text-fill-color: transparent;
+                                        }
+                                </style>
+                                <p class="h-6">&#8377 @dr["Price"]</p>
+                                <p class="h-6">@dr["Description"]</p>
+                                @{
+                                    if (Convert.ToBoolean(dr["IsActive"]))
+                                    {
+                                        <p class="h-6"><small class="text-muted">Available</small></p>
+                                    }
+                                    else
+                                    {
+                                        <p class="h-6"><small class="text-muted">Not available</small></p>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        @{
+                            if(CV.RestaurantID() != 0)
+                            {
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-0">
+
+                                    <form asp-area="Admin" asp-controller="Menu" asp-action="AddEdit">
+                                        <input type="hidden" name="MenuID" value="@Convert.ToInt32(dr["MenuID"])" />
+                                        <button class="btn btn-outline-warning">Edit</button>
+                                    </form>
+                                    <form asp-area="Admin" asp-controller="Menu" asp-action="Delete">
+                                        <input type="hidden" name="MenuID" value="@Convert.ToInt32(dr["MenuID"])" />
+                                        <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                                        <input type="hidden" name="CategoryID" value="@CV.CategoryID()" />
+                                        <button class="btn btn-outline-danger" onclick="return confirmDelete()">Delete</button>
+                                    </form>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                
+            }
+        </div>
+
+        @{
+            if(CV.RestaurantID() != 0)
+            {
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+                    <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                    <button class="btn btn-outline-secondary">Back</button>
+                </form>
+            }
+            else if(CV.CategoryID() != 0)
+            {
+                <form asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+                    <button class="btn btn-outline-secondary">Back</button>
+                </form>
+            }
+            
+        }
+        @* <a asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+            <input type="hidden" name="RestaurantID" value="@Convert.ToInt32(TempData["RestaurantID"])"/>
+            <button class="btn btn-secondary">
+                Back
+            </button>
+        </a> *@
+
+    </div>
+
+</main>
+
+@section Scripts{
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure to delete record?"))
+                return true;
+
+            else
+                return false;
+        }
+
+
+
+    </script>
+
+   @*  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> *@
+
+
+
+   @*  <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [75, 300],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#currentValues").text("Current values: $" + ui.values[0] + " - $" + ui.values[1]);
+
+                    // Additional code to send values to the server if needed
+                    updateSliderValues(ui.values[0], ui.values[1]);
+                }
+            });
+
+            function updateSliderValues(value1, value2) {
+                $.ajax({
+                    url: "Admin/Menu/UpdateSliderValues",
+                    method: "POST",
+                    data: { value1: value1, value2: value2 },
+                    success: function (response) {
+                        console.log("Slider values updated on the server.");
+                    },
+                    error: function (error) {
+                        console.error("Error updating slider values:", error);
+                    }
+                });
+            }
+
+            // Set initial value
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
+
+            $("#currentValues").text("Current values: $" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
+        });
+
+        $("#applyFilterBtn").click(function () {
+            alert("hello");
+            var formData = $("#filterForm").serializeArray();
+            var sliderValues = $("#slider-range").slider("option", "values");
+
+            // Remove existing SliderValue1 and SliderValue2 entries from formData
+            formData = formData.filter(item => item.name !== "SliderValue1" && item.name !== "SliderValue2");
+
+            // Add individual parameters for SliderValue1 and SliderValue2
+            formData.push({ name: "SliderValue1", value: sliderValues[0] });
+            formData.push({ name: "SliderValue2", value: sliderValues[1] });
+
+            $.ajax({
+                url: "@Url.Action("MenuFilter", "Menu", new { area = "Admin" })",
+                method: "POST",
+                data: formData,
+                success: function (response) {
+                    console.log("Filter applied successfully.", response);
+                    // Redirect to MenuList page with filtered data
+                    window.location.href = "@Url.Action("MenuList", "Menu", new { area = "Admin" })";
+                },
+                error: function (error) {
+                    console.log("Error applying filter:", error);
+                }
+            });
+        });
+
+    </script> *@
+}

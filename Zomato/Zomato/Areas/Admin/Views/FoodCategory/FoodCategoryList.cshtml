@@ -1,0 +1,186 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@using Zomato.BAL;
+@using System.Data;
+@model DataTable;
+
+
+<style>
+
+    .card-container {
+        width: 250px;
+        height: auto;
+        /* border: 2px solid rgba(10 , 50 , 10, 0.8); */
+        border-radius: 10px;
+        margin: 10px;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        /*  border: 1px solid rgba(10, 50, 10, 0.5); */
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: cover;
+        }
+
+</style>
+
+<main class="main" id="main">
+
+    <div class="border rounded p-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="fw-bold"><i class="ri-cake-2-line me-2" style="font-size: 20px"></i>Food Category</h3>
+            <a asp-area="Admin" asp-controller="FoodCategory" asp-action="AddEdit">
+                <input type="hidden" value="@CV.RestaurantID()" />
+                <button class="btn btn btn-primary">
+                    Add Food Category
+                </button>
+            </a>
+
+        </div>
+
+        <hr />
+
+        
+
+        @* <div>
+        <table class="table">
+        <thead>
+        <th>CategoryID</th>
+        <th>CategoryName</th>
+        <th>ImageUrl</th>
+        <th>Created</th>
+        <th>Modified</th>
+        </thead>
+
+        <tbody>
+        @foreach (DataRow dr in Model.Rows)
+        {
+        <tr>
+        <td>@dr["CategoryID"]</td>
+        <td>@dr["CategoryName"]</td>
+        <td>@dr["ImageUrl"]</td>
+        <td>@Convert.ToDateTime(dr["Created"])</td>
+        <td>@Convert.ToDateTime(dr["Modified"])</td>
+        </tr>
+        }
+        </tbody>
+        </table>
+        </div> *@
+        <div class="d-flex flex-wrap">
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <div class="card-container border">
+
+                    <div class="card-header">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+                            @{
+                                if(CV.RestaurantID() == 0)
+                                {
+                                    <form asp-area="Admin" asp-controller="FoodCategory" asp-action="AddEdit">
+                                        <input type="hidden" name="CategoryID" value="@dr["CategoryID"]" />
+                                        <button class="btn btn-outline-primary btn-sm">
+                                            <i class="ri-edit-line"></i>
+                                        </button>
+
+                                    </form>
+                                }
+
+                                else
+                                {
+                                    <form asp-area="Admin" asp-controller="FoodCategory" asp-action="Delete">
+                                        <input type="hidden" name="CategoryID" value="@dr["CategoryID"]" />
+                                        <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                                        <button class="btn btn-outline-primary btn-sm" onclick="return confirmDelete()">
+                                            <i class="ri-delete-bin-6-line"></i>
+                                        </button>
+
+                                    </form>
+                                }
+                            }
+                           
+                        </div>
+                    </div>
+
+                    <div class="image-container">
+
+                        <img src="@Url.Content(dr["ImageUrl"].ToString())" />
+                        
+
+                    </div>
+
+                    @* <div class="text-center mt-2">
+                <p>@dr["CategoryName"]</p>
+                </div> *@
+
+                    <div class="text-center mt-2">
+                        @{
+                            if(CV.RestaurantID() != 0)
+                            {
+                                <form asp-area="Admin" asp-controller="Menu" asp-action="MenuList">
+                                    <input type="hidden" name="RestaurantID" value="@CV.RestaurantID()" />
+                                    <input type="hidden" name="CategoryID" value="@dr["CategoryID"]" />
+                                    <button class="btn btn-light">
+                                        @dr["CategoryName"]
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-area="Admin" asp-controller="Menu" asp-action="MenuList">
+                                     
+                                    <input type="hidden" name="CategoryID" value="@dr["CategoryID"]" />
+                                    <button class="btn btn-light">
+                                        @dr["CategoryName"]
+                                    </button>
+                                </form>
+                            }
+                        }
+                    </div>
+
+                </div>
+            }
+        </div>
+
+        @{
+            if (CV.RestaurantID() != 0)
+            {
+                <a asp-area="Admin" asp-controller="Restaurant" asp-action="RestaurantList">
+                    <button class="btn btn-secondary">
+                        Back
+                    </button>
+                </a>
+            }
+        }
+    </div>
+
+
+
+
+</main>
+
+@section Scripts{
+
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure to delete record?"))
+                return true;
+
+            else
+                return false;
+        }
+    </script>
+}
+

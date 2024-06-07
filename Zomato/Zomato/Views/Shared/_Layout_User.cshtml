@@ -1,0 +1,233 @@
+﻿@using Zomato.BAL;
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Zomato</title>
+    <link rel="icon" href="~/assets/img/download.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/owl.carousel.min.css">
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/themify-icons.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/flaticon.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/slick.css">
+    <link rel="stylesheet" href="~/userAssets/css/gijgo.min.css">
+    <link rel="stylesheet" href="~/userAssets/css/nice-select.css">
+    <link rel="stylesheet" href="~/userAssets/css/all.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="~/userAssets/css/style.css">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+
+<style>
+    .logo img {
+        max-height: 40px;
+        margin-right: 6px;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+
+<body>
+
+    <header class="home_menu menu">
+        <div class="container">
+            <div class="row align-items-center ">
+                <div class="col-lg-12 ">
+                    <nav class="navbar  navbar-expand-lg navbar-light justify-content-between ">
+                        <a class="nav-link fw-bold" asp-area="" asp-controller="User1" asp-action="UserIndex">Get the App</a>
+
+
+                        <div class="collapse navbar-collapse main-menu-item pr-0"
+                             id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link">Investor Relations</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link">Add Restaurant</a>
+                                </li>
+                                <li class="nav-item ">
+                                    @if(CV.UserName() == null)
+                                    {
+                                        <a class="nav-link" asp-area="User" asp-controller="User" asp-action="SEC_UserLogin">Login</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-link" asp-area="User" asp-controller="User" asp-action="Logout">Logout</a>
+                                    }
+
+                                </li>
+                            </ul>
+                        </div>
+
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </header>
+
+    <div id="intro" class="bg-image shadow-2-strong">
+        <div class="mask">
+            <div class="container d-flex align-items-center justify-content-center text-center h-100">
+                <div class="text-white" data-mdb-theme="dark">
+                    <h1 class="mb-3 text-light fw-bolder">ZOMATO</h1>
+                    <h1 class="mb-4 text-light">Discover the best food & drinks in <span>Rajkot</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+  
+
+    <main>
+        @RenderBody()
+    </main><!-- End #main -->
+    <!-- footer part start-->
+     <footer class="footer-area body footer">
+         <hr />
+        <div class="container">
+            <div class="row pb-4">
+               <a class="navbar-brand d-inline-flex logo"><img class="d-inline-block " src="~/userAssets/img/logoblack.png" alt="logo" /></a>
+            </div>
+            <div class="row ">
+                <div class="col-xl-3 col-sm-6 col-md-3 col-lg-3">
+                    <div class="single-footer-widget footer_1">
+                        <h4>About Zomato</h4>
+                        <div class="contact_info">
+                            <ul class="ps-0">
+                                <li><a>Who We Are</a></li>
+                                <li><a>Blog</a></li>
+                                <li><a>Work With Us</a></li>
+                                <li><a>Investor Relations</a></li>
+                                <li><a>Report Fraud</a></li>
+                                <li><a>Press Kit</a></li>
+                                <li><a>Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-md-2 col-lg-3">
+                    <div class="single-footer-widget footer_2">
+                        <h4>Zomaverse</h4>
+                        <div class="contact_info">
+                            <ul class="ps-0">
+                                <li><a href="#">Zomato</a></li>
+                                <li><a href="#">Blinkit</a></li>
+                                <li><a href="#">Feeding India</a></li>
+                                <li><a href="#">Hyperpure</a></li>
+                                <li><a href="#">Zomaland</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-md-3 col-lg-3">
+                    <div class="single-footer-widget footer_2">
+                        <h4>For Restaurants</h4>
+                        <div class="contact_info">
+                            <ul class="ps-0">
+                                <li><a>Partner With Us</a></li>
+                                <li><a>Apps For You</a></li>
+                            </ul class="ps-0">
+                        </div>
+                        <h4>For EnterPrises</h4>
+                        <div class="contact_info">
+                            <ul class="ps-0">
+                                <li><a>Zomato For Enterprise</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-md-4 col-lg-3">
+                    <div class="single-footer-widget footer_3">
+                        <h4>Learn More</h4>
+                       <div class="contact_info">
+                            <ul class="ps-0">
+                                <li><a>Privacy</a></li>
+                                <li><a>Security</a></li>
+                                <li><a>Terms</a></li>
+                                <li><a>Sitemap</a></li>
+                                
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="copyright_part_text">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p class="footer-text m-0">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="copyright_social_icon text-right">
+                           <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter-square"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer part end-->
+    <!-- ===============================================-->
+    <!-- jquery plugins here-->
+    <!-- jquery -->
+    <script src="~/userAssets/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="~/userAssets/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/userAssets/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="~/userAssets/js/jquery.magnific-popup.js"></script>
+    <!-- swiper js -->
+    <script src="~/userAssets/js/swiper.min.js"></script>
+    <!-- swiper js -->
+    <script src="~/userAssets/js/masonry.pkgd.js"></script>
+    <!-- particles js -->
+    <script src="~/userAssets/js/owl.carousel.min.js"></script>
+    <!-- swiper js -->
+    <script src="~/userAssets/js/slick.min.js"></script>
+    <script src="~/userAssets/js/gijgo.min.js"></script>
+    <script src="~/userAssets/js/jquery.nice-select.min.js"></script>
+    <!-- custom js -->
+    <script src="~/userAssets/js/custom.js"></script>
+    
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

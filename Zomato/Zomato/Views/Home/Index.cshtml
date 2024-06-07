@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+
+@using System.Data;
+
+<style>
+
+    .card{
+
+        width: 90%;
+        border: 3px solid rgba(100 , 150 , 250 , 0.2);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.2s linear;
+       
+        
+    }
+
+
+</style>
+
+<main class="main" id="main">
+
+
+<div class="text-center">
+    <h1 class="display-4">Statistics</h1>
+    
+
+    <div class="d-flex justify-content-start align-items-center flex-wrap pt-5">
+
+        @foreach (DataRow dr in Model.Rows)
+        {
+            <div class="col-3">
+                
+            
+                    @if(Convert.ToString(dr["DataName"]) == "Restaurant")
+                    {
+                      <a asp-area="Admin" asp-controller="Restaurant" asp-action="RestaurantList">
+                         <div class="card">
+                            <h4 class="my-2 py-1 px-2">
+                                <i class="ri-restaurant-line" style="font-size: 20px;"></i>
+                                @dr["DataName"]
+                            </h4>
+                            <p class="fs-5 fw-bold">@dr["DataCount"]</p>
+                         </div>
+                      </a>
+                    }
+                    @if(Convert.ToString(dr["DataName"]) == "FoodCategory")
+                    {
+                        <a asp-area="Admin" asp-controller="FoodCategory" asp-action="FoodCategoryList">
+                         <div class="card">
+                           <h4 class="my-1 py-1 px-1">
+                             <i class="ri-cake-2-line" style="font-size: 20px"></i>
+                        @dr["DataName"]
+                       </h4>
+                        <p class="fs-5 fw-bold">@dr["DataCount"]</p>
+                       </div>
+                      </a>
+                        
+                       
+                        
+                    }
+                    @if(Convert.ToString(dr["DataName"]) == "MenuItem")
+                    {
+                        <a asp-area="Admin" asp-controller="Menu" asp-action="MenuList">
+                            <div class="card">
+                           <h4 class="my-2 py-1 px-2">
+                             <i class="bx bxs-coffee" style="font-size: 20px"></i>
+                        @dr["DataName"]
+                       </h4>
+                        <p class="fs-5 fw-bold">@dr["DataCount"]</p>
+                       </div>
+                        </a>
+                       
+                    }
+                     @if(Convert.ToString(dr["DataName"]) == "User")
+                    {
+                        <a asp-area="Admin" asp-controller="User" asp-action="UserList">
+                            <div class="card">
+                           <h4 class="my-2 py-1 px-2">
+                            <i class="ri-emotion-line" style="font-size: 20px"></i>
+                        @dr["DataName"]
+                       </h4>
+                        <p class="fs-5 fw-bold">@dr["DataCount"]</p>
+                       </div>
+                        </a>
+                        
+                    }
+                    
+                
+                </div>
+            
+
+        }
+
+    </div
+
+</div>
+</main>

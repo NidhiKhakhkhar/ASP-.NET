@@ -1,0 +1,206 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Zomato.Areas.Admin.Models.Restaurants;
+
+<style>
+    /* Remove the increment and decrement arrows */
+    input[type=number] {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+
+<main class="main" id="main">
+    <div class="container border border-gray rounded p-5 shadow">
+        <h2><i class="ri-restaurant-line me-2 pb-5" style="font-size: 25px"></i>Restaurants</h2>
+
+        <hr />
+        <form class="pt-3" method="post" asp-area="Admin" asp-controller="Restaurant" asp-action="Save">
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Restaurant Name</label>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Restaurant Name" aria-label="Restaurant name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Description</label>
+                <input type="text" class="form-control" asp-for="Description" placeholder="Description" aria-label="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Address</label>
+                <input type="text" class="form-control" asp-for="Address" placeholder="Address" aria-label="Address">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-4 my-4">
+                    <label><span class="text-danger">*</span>Country</label>
+                    <select onchange="funOnCountryChange()" class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+                        <option value="">Select Country</option>
+                    </select>
+                    <span asp-validation-for="CountryID" class="text-danger"></span>
+                </div>
+
+                <div class="col col-md-4 my-4">
+                    <label><span class="text-danger">*</span>State</label>
+                    <select onchange="funOnStateChange()" class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                        <option value="">Select State</option>
+                    </select>
+                    <span asp-validation-for="StateID" class="text-danger"></span>
+                </div>
+
+                <div class="col col-md-4 my-4">
+                    <label><span class="text-danger">*</span>City</label>
+                    <select class="form-control" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
+                        <option value="">Select City</option>
+                    </select>
+                    <span asp-validation-for="CityID" class="text-danger"></span>
+                </div>
+            </div>
+
+            
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>PhoneNo</label>
+                <input type="tel" class="form-control" asp-for="PhoneNo" placeholder="PhoneNo" aria-label="PhoneNo" min="0">
+                <span asp-validation-for="PhoneNo" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>Email</label>
+                <input type="text" class="form-control" asp-for="Email" placeholder="Email" aria-label="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label>AverageRating</label>
+                <input type="text" class="form-control" asp-for="AverageRatig" placeholder="AverageRating" aria-label="AverageRating">
+                
+            </div>
+
+            <div class="col my-4">
+                <label>NumReviews</label>
+                <input type="text" class="form-control" asp-for="NumReviews" placeholder="NumReviews" aria-label="NumReviews">
+                
+            </div>
+
+            <div class="col my-4">
+                <label><span class="text-danger">*</span>IsActive</label>
+                <div class="d-flex mt-3">
+                    <div class="d-flex">
+                        <input type="radio" value="true" asp-for="IsActive" checked />
+                        <span class="ms-3">Yes</span>
+                    </div>
+                    <div class="d-flex ms-4">
+                        <input type="radio" value="false" asp-for="IsActive" />
+                        <span class="ms-3">No</span>
+                    </div>
+                </div>
+                @* <input type="text" class="form-control" asp-for="IsActive" placeholder="IsActive" aria-label="IsActive"> *@
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+
+            <div class="col my-4">
+                <label>Image URL</label>
+                <input type="text" class="form-control" asp-for="ImageUrl" placeholder="ImageUrl" aria-label="ImageUrl">
+                
+            </div>
+
+            <div class="row">
+                <div class="col col-md-6 my-4">
+                    <label><span class="text-danger">*</span>OpeningTime</label>
+                    <input type="time" value="" class="form-control" asp-for="OpeningTime" placeholder="OpeningTime" aria-label="OpeningTime">
+                    <span asp-validation-for="OpeningTime" class="text-danger"></span>
+                </div>
+
+                <div class="col col-md-6 my-4">
+                    <label><span class="text-danger">*</span>ClosedTime</label>
+                    <input type="time" value="" class="form-control" asp-for="ClosedTime" placeholder="ClosedTime" aria-label="ClosedTime">
+                    <span asp-validation-for="ClosedTime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col mt-4">
+
+                <input type="hidden" name="RestaurantID" value="@Model.RestaurantID" />
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+
+        </form>
+
+        <br />
+
+        <a asp-area="Admin" asp-action="RestaurantList" asp-controller="Restaurant">
+            <button class="btn btn-secondary" type="submit">Back</button>
+        </a>
+
+    </div>
+</main>
+
+@section Scripts{
+
+    <script>
+        function funOnCountryChange() {
+            var CountryID = $("#CountryID").val();
+
+            $("#StateID").empty();
+            $("#StateID").append($("<option></option>").val("").html("Select State"));
+
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StatesforDropdown","Restaurant", new {area = "Admin"})" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+
+                            $.each(Result, function (key, value) {
+                                $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error to fetch data");
+                        }
+                    }
+                )
+            }
+        }
+
+
+        function funOnStateChange() {
+            var StateID = $("#StateID").val();
+
+            $("#CityID").empty();
+            $("#CityID").append($("<option></option>").val("").html("Select City"));
+
+            if (CountryID !== "") {
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("CityforDropdown","Restaurant", new {area = "Admin"})" + "?&StateID=" + StateID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+
+                            $.each(Result, function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                        },
+                        error: function (err) {
+                            alert("Error to fetch data");
+                        }
+                    }
+                )
+            }
+        }
+    </script>
+
+
+}

@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Zomato.cshtml";
+}
+@using Zomato.BAL;
+@using System.Data;
+@model DataTable;
+<main class="main" id="main">
+    <div class="container">
+        <h1>Cart List</h1>
+    </div>
+    <div class="container">
+        <nav class="nav">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="User1" asp-action="UserIndex">Home</a></li>
+                <li class="breadcrumb-item"><a asp-area="User" asp-controller="User" asp-action="Index" asp-route-cityid="@CV.CityID()" asp-route-cityname="@CV.CityName()">@CV.CityName()</a></li>
+                <li class="breadcrumb-item active">Cart</li>
+            </ol>
+        </nav>
+    </div>
+    <hr />
+    <br />
+    <div class="container">
+        @{
+            decimal subtotal = 0;
+        }
+        @foreach (DataRow dr in Model.Rows)
+        {
+
+
+            <div class="card mb-3">
+                <div class="d-flex justify-content-between">
+                    <div class="row g-0 w-75">
+                        <div class="col-md-2 p-2">
+                            <img src=@dr["ImageUrl"] class="img-fluid rounded" alt="...">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title pb-0">@dr["ItemName"]</h5>
+
+                                <p>@dr["Name"]</p>
+
+
+                                @{
+                                    decimal price = (decimal)dr["Price"];
+                                    int quantity = (int)dr["Quantity"];
+                                    decimal totalPrice = price * quantity;
+
+                                    subtotal = subtotal + totalPrice;
+                                }
+                                <p> @dr["Price"] x @dr["Quantity"] = <span class="fw-bold h5">&#8377 @totalPrice</span></p>
+
+                                
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="pr-5">
+                            <div class="quantity-container px-2 ">
+                                <a asp-area="User" asp-controller="Cart" asp-action="DecrementQuantity" asp-route-menuid="@Convert.ToInt32(dr["MenuID"])" asp-route-quantity="@Convert.ToInt32(dr["Quantity"])" asp-route-returnUrl="@Url.ActionContext.HttpContext.Request.Path">
+                                    -
+                                </a>
+                                <div>
+                                    @dr["Quantity"]
+                                </div>
+                                <a asp-area="User" asp-controller="Cart" asp-action="IncrementQuantity" asp-route-menuid="@Convert.ToInt32(dr["MenuID"])" asp-route-quantity="@Convert.ToInt32(dr["Quantity"])" asp-route-returnUrl="@Url.ActionContext.HttpContext.Request.Path">
+                                    +
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+        @if(Model.Rows.Count > 0)
+        {
+            <div class="d-flex justify-content-between">
+                <h3>Total Price : @subtotal </h3>
+                <a asp-area="User" asp-controller="Cart" asp-action="PlaceOrder">
+                    <button class="btn btn-lg btn-primary">
+                        Order
+                    </button>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="container text-secondary">
+                <div class="p-auto">
+                    <h1>Your Cart is Empty!!</h1>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</main>
